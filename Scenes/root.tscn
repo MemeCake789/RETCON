@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt2ne53qelvns"]
+[gd_scene load_steps=8 format=3 uid="uid://dt2ne53qelvns"]
 
 [ext_resource type="Script" uid="uid://2u8jtq11umd0" path="res://Scripts/PlayerController.gd" id="1_8pvmw"]
 [ext_resource type="Texture2D" uid="uid://bkc0c714b7g50" path="res://Assets/icon.svg" id="2_vnucn"]
+[ext_resource type="Script" uid="uid://c7it2dcggmk3i" path="res://Scripts/CameraController.gd" id="3_vnucn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpdt3"]
 size = Vector2(46, 46)
@@ -29,8 +30,10 @@ scale = Vector2(0.359375, 0.359375)
 texture = ExtResource("2_vnucn")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+ignore_rotation = false
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+script = ExtResource("3_vnucn")
 
 [node name="Map" type="Node2D" parent="."]
 

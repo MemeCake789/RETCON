@@ -33,7 +33,7 @@ func HandlePlayerMovement(delta: float):
 		coyote_timer = 0.0 # Consume coyote time
 
 	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction := Input.get_axis("Move_Left", "Move_Right")
 	
 	var acceleration = GROUND_ACCELERATION if is_on_floor() else AIR_ACCELERATION
 	var deceleration = GROUND_DECELERATION if is_on_floor() else AIR_DECELERATION
@@ -48,7 +48,6 @@ func HandlePlayerMovement(delta: float):
 		current_speed = move_toward(current_speed, INITIAL_SPEED, GROUND_DECELERATION * delta)
 
 	was_on_floor = is_on_floor()
-	print(velocity.x, current_speed)
 	
 	move_and_slide()
 
@@ -75,5 +74,8 @@ func JumpBufferCheck(delta: float):
 		jump_buffer_timer -= delta
 
 	# Handle jump input.
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("Jump"):
 		jump_buffer_timer = JUMP_BUFFER_TIME
+
+func get_player_velocity() -> Vector2:
+	return velocity
