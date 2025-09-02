@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt2ne53qelvns"]
+[gd_scene load_steps=10 format=3 uid="uid://dt2ne53qelvns"]
 
 [ext_resource type="Script" uid="uid://2u8jtq11umd0" path="res://Scripts/PlayerController.gd" id="1_8pvmw"]
 [ext_resource type="Texture2D" uid="uid://bkc0c714b7g50" path="res://Assets/icon.svg" id="2_vnucn"]
 [ext_resource type="Script" uid="uid://c7it2dcggmk3i" path="res://Scripts/CameraController.gd" id="3_vnucn"]
+[ext_resource type="Script" uid="uid://cop2p45f6pvjt" path="res://Scenes/gun.gd" id="4_4g5cr"]
+[ext_resource type="Texture2D" uid="uid://bbp27wyacj15g" path="res://Assets/Deagle.webp" id="4_c3mwy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpdt3"]
 size = Vector2(46, 46)
@@ -34,6 +36,18 @@ ignore_rotation = false
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("3_vnucn")
+
+[node name="Gun" type="Node2D" parent="Player"]
+script = ExtResource("4_4g5cr")
+
+[node name="GunSprite" type="Sprite2D" parent="Player/Gun"]
+position = Vector2(44.2245, 0)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("4_c3mwy")
+
+[node name="ShootPoint" type="Marker2D" parent="Player/Gun/GunSprite"]
+position = Vector2(614.333, -239.667)
+scale = Vector2(33.3333, 33.3333)
 
 [node name="Map" type="Node2D" parent="."]
 

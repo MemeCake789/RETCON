@@ -7,7 +7,7 @@ var previous_velocity : Vector2 = Vector2.ZERO # Velocity of last frame
 func _ready() -> void:
 	pass # Replace with function body.
 
-
+ 
 func _process(delta: float) -> void:
 	MouseCameraOffset(delta)
 	PlayerSpeedCameraTilt(delta)
