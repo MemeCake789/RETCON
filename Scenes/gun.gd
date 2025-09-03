@@ -31,4 +31,4 @@ func apply_rotation(mouse_position: Vector2) -> void:
 	var normalized_degrees = fmod(fmod(rotation_degrees, 360.0) + 360.0, 360.0)
 	gun_sprite.flip_v = (normalized_degrees > 90 and normalized_degrees < 270)
 
-	print(normalized_degrees, rotation_degrees)
+	#print(normalized_degrees, rotation_degrees)
