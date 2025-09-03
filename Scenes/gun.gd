@@ -26,7 +26,9 @@ func apply_offset(mouse_position: Vector2) -> void:
 func apply_rotation(mouse_position: Vector2) -> void:
 	var target_dir: float = (mouse_position - global_position).angle()
 	rotation = lerp_angle(rotation, target_dir, rotation_speed)
-	var normalized_degrees = fmod(rad_to_deg(rotation) + 360.0, 360.0)
-	
+		
 	#flip da gun if its on the left side of player
+	var normalized_degrees = fmod(fmod(rotation_degrees, 360.0) + 360.0, 360.0)
 	gun_sprite.flip_v = (normalized_degrees > 90 and normalized_degrees < 270)
+
+	print(normalized_degrees, rotation_degrees)
