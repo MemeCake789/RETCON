@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var gun_sprite: Sprite2D = $GunSprite
+@onready var gun_raycast: RayCast2D = $GunSprite/RayCast2D
 
 # max_offset is the max distance that the gun can go, 
 # and max_distance is how far the mouse has to be from the gun to reach the max_offset value.
@@ -15,9 +16,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 	
+	
 	apply_rotation(mouse_pos)
 	apply_offset(mouse_pos)
-
+	
+	if Input.is_action_just_pressed("Shoot"):
+		var coliding_item = gun_raycast.get_collider()
+		handle_shoot(coliding_item)
+		
 func apply_offset(mouse_position: Vector2) -> void:
 	var distance_to_mouse = global_position.distance_to(mouse_position)
 	var offset_ratio = clamp(distance_to_mouse / max_distance, 0.0, 1.0)
@@ -32,3 +38,8 @@ func apply_rotation(mouse_position: Vector2) -> void:
 	gun_sprite.flip_v = (normalized_degrees > 90 and normalized_degrees < 270)
 
 	#print(normalized_degrees, rotation_degrees)
+
+func handle_shoot(body) -> void:
+	if body and body.is_in_group("Enemy"):
+		body.queue_free()
+	

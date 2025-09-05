@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dt2ne53qelvns"]
+[gd_scene load_steps=11 format=3 uid="uid://dt2ne53qelvns"]
 
 [ext_resource type="Script" uid="uid://2u8jtq11umd0" path="res://Scripts/PlayerController.gd" id="1_8pvmw"]
 [ext_resource type="Texture2D" uid="uid://bkc0c714b7g50" path="res://Assets/icon.svg" id="2_vnucn"]
@@ -19,9 +19,13 @@ colors = PackedColorArray(0, 0, 0, 1, 0.741385, 0.741385, 0.741385, 1, 0.25974, 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_vnucn"]
 gradient = SubResource("Gradient_8pvmw")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4g5cr"]
+size = Vector2(52.7266, 52.1467)
+
 [node name="root" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(-199.65, 42.592)
 script = ExtResource("1_8pvmw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
@@ -45,9 +49,10 @@ position = Vector2(44.2245, 0)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("4_c3mwy")
 
-[node name="ShootPoint" type="Marker2D" parent="Player/Gun/GunSprite"]
-position = Vector2(614.333, -239.667)
-scale = Vector2(33.3333, 33.3333)
+[node name="RayCast2D" type="RayCast2D" parent="Player/Gun"]
+position = Vector2(62.2245, -6.58902)
+scale = Vector2(0.03, 0.03)
+target_position = Vector2(5000, -17.183)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -86,3 +91,26 @@ shape = SubResource("RectangleShape2D_8pvmw")
 [node name="Sprite2D" type="Sprite2D" parent="Map/Floor3"]
 scale = Vector2(0.0534915, 10.707)
 texture = SubResource("GradientTexture1D_vnucn")
+
+[node name="Floor4" type="StaticBody2D" parent="Map"]
+position = Vector2(-23, 597.585)
+rotation = -1.57079
+scale = Vector2(15.4777, 0.987688)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor4"]
+scale = Vector2(0.673895, 1.03057)
+shape = SubResource("RectangleShape2D_8pvmw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Map/Floor4"]
+scale = Vector2(0.0534915, 10.707)
+texture = SubResource("GradientTexture1D_vnucn")
+
+[node name="Enemy" type="RigidBody2D" parent="." groups=["Enemy"]]
+position = Vector2(61.397, 91.1921)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("RectangleShape2D_4g5cr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+scale = Vector2(0.400001, 0.400001)
+texture = ExtResource("2_vnucn")
