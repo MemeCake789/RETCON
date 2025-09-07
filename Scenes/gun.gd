@@ -40,6 +40,7 @@ func apply_rotation(mouse_position: Vector2) -> void:
 	#print(normalized_degrees, rotation_degrees)
 
 func handle_shoot(body) -> void:
+	$AnimationPlayer.play("gun_flash")
 	if body and body.is_in_group("Enemy"):
 		body.queue_free()
 	
