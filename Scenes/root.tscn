@@ -1,41 +1,29 @@
-[gd_scene load_steps=15 format=3 uid="uid://dt2ne53qelvns"]
+[gd_scene load_steps=17 format=3 uid="uid://dt2ne53qelvns"]
 
 [ext_resource type="Script" uid="uid://2u8jtq11umd0" path="res://Scripts/PlayerController.gd" id="1_8pvmw"]
 [ext_resource type="Texture2D" uid="uid://bkc0c714b7g50" path="res://Assets/icon.svg" id="2_vnucn"]
 [ext_resource type="Script" uid="uid://c7it2dcggmk3i" path="res://Scripts/CameraController.gd" id="3_vnucn"]
-[ext_resource type="Script" uid="uid://cop2p45f6pvjt" path="res://Scenes/gun.gd" id="4_4g5cr"]
+[ext_resource type="Script" uid="uid://cop2p45f6pvjt" path="res://Scripts/gun.gd" id="4_4g5cr"]
 [ext_resource type="Texture2D" uid="uid://bbp27wyacj15g" path="res://Assets/Deagle.webp" id="4_c3mwy"]
 [ext_resource type="Texture2D" uid="uid://ynkcm2ppo741" path="res://Assets/basic_gun_flash.png" id="6_ckhy6"]
+[ext_resource type="Script" uid="uid://bvd8dcadqus1b" path="res://Scripts/Enemy.gd" id="7_dun2r"]
+
+[sub_resource type="GDScript" id="GDScript_dun2r"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpdt3"]
 size = Vector2(46, 46)
-
-[sub_resource type="Animation" id="Animation_dun2r"]
-resource_name = "gun_flash"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GunSprite/Gun_Flash:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.04, 0.06),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GunSprite/Gun_Flash:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_r3lo5"]
 length = 0.001
@@ -64,6 +52,33 @@ tracks/1/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_dun2r"]
+resource_name = "gun_flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GunSprite/Gun_Flash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04, 0.06),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GunSprite/Gun_Flash:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qtxxq"]
 _data = {
 &"RESET": SubResource("Animation_r3lo5"),
@@ -84,6 +99,7 @@ gradient = SubResource("Gradient_8pvmw")
 size = Vector2(52.7266, 52.1467)
 
 [node name="root" type="Node2D"]
+script = SubResource("GDScript_dun2r")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(-199.65, 42.592)
@@ -119,7 +135,6 @@ hframes = 4
 [node name="RayCast2D" type="RayCast2D" parent="Player/Gun/GunSprite"]
 unique_name_in_owner = true
 position = Vector2(600, -219.634)
-scale = Vector2(1, 1)
 target_position = Vector2(20000, -17.183)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Gun"]
@@ -180,6 +195,7 @@ texture = SubResource("GradientTexture1D_vnucn")
 
 [node name="Enemy" type="RigidBody2D" parent="." groups=["Enemy"]]
 position = Vector2(61.397, 91.1921)
+script = ExtResource("7_dun2r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 shape = SubResource("RectangleShape2D_4g5cr")

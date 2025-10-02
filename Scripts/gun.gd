@@ -13,7 +13,7 @@ extends Node2D
 func _ready() -> void:
 	pass 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 	
 	
@@ -40,7 +40,8 @@ func apply_rotation(mouse_position: Vector2) -> void:
 	#print(normalized_degrees, rotation_degrees)
 
 func handle_shoot(body) -> void:
+	$AnimationPlayer.seek(0.0,true)
 	$AnimationPlayer.play("gun_flash")
-	if body and body.is_in_group("Enemy"):
-		body.queue_free()
+	if body and body.is_in_group("Enemy") and body.has_method("Damage"):
+		body.Damage(20.0)
 	
