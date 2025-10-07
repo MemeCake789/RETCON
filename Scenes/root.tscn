@@ -127,9 +127,10 @@ scale = Vector2(0.03, 0.03)
 texture = ExtResource("4_c3mwy")
 
 [node name="Gun_Flash" type="Sprite2D" parent="Player/Gun/GunSprite"]
-position = Vector2(1159.16, -219.634)
+position = Vector2(-385.81702, -1919.7333)
 scale = Vector2(11.5, 11.5)
 texture = ExtResource("6_ckhy6")
+offset = Vector2(134.34583, 147.83472)
 hframes = 4
 
 [node name="RayCast2D" type="RayCast2D" parent="Player/Gun/GunSprite"]
@@ -137,7 +138,8 @@ unique_name_in_owner = true
 position = Vector2(600, -219.634)
 target_position = Vector2(20000, -17.183)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Gun"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Gun/GunSprite"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_qtxxq")
 }

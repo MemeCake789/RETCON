@@ -9,6 +9,8 @@ extends Node2D
 @export var max_offset		: Vector2 	= Vector2(70, 0)
 @export var max_distance	: float 	= 400.0
 @export var rotation_speed	: float 	= 0.6
+@export var offset_speed	: float 	= 0.3
+@export var recoil_offset	: Vector2	= Vector2(-15,0)
 
 func _ready() -> void:
 	pass 
@@ -27,7 +29,8 @@ func _process(_delta: float) -> void:
 func apply_offset(mouse_position: Vector2) -> void:
 	var distance_to_mouse = global_position.distance_to(mouse_position)
 	var offset_ratio = clamp(distance_to_mouse / max_distance, 0.0, 1.0)
-	gun_sprite.position = lerp(Vector2.ZERO, max_offset, offset_ratio)
+	var target_offset = max_offset * offset_ratio
+	gun_sprite.position = lerp(gun_sprite.position, target_offset, offset_speed)
 
 func apply_rotation(mouse_position: Vector2) -> void:
 	var target_dir: float = (mouse_position - global_position).angle()
@@ -39,9 +42,15 @@ func apply_rotation(mouse_position: Vector2) -> void:
 
 	#print(normalized_degrees, rotation_degrees)
 
+func apply_recoil(recoil : Vector2) -> void:
+	gun_sprite.position += recoil
+
 func handle_shoot(body) -> void:
-	$AnimationPlayer.seek(0.0,true)
-	$AnimationPlayer.play("gun_flash")
+	$GunSprite/AnimationPlayer.seek(0.0,true)
+	$GunSprite/AnimationPlayer.play("gun_flash")
+
+	apply_recoil(recoil_offset)
+
 	if body and body.is_in_group("Enemy") and body.has_method("Damage"):
 		body.Damage(20.0)
 	
