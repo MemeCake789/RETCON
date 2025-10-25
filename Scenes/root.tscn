@@ -1,12 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://dt2ne53qelvns"]
+[gd_scene load_steps=22 format=3 uid="uid://dt2ne53qelvns"]
 
 [ext_resource type="Script" uid="uid://2u8jtq11umd0" path="res://Scripts/PlayerController.gd" id="1_8pvmw"]
-[ext_resource type="Texture2D" uid="uid://bkc0c714b7g50" path="res://Assets/icon.svg" id="2_vnucn"]
+[ext_resource type="Texture2D" uid="uid://8kvudqemtd4e" path="res://Assets/cyan.jpg" id="2_r3lo5"]
 [ext_resource type="Script" uid="uid://c7it2dcggmk3i" path="res://Scripts/CameraController.gd" id="3_vnucn"]
-[ext_resource type="Script" uid="uid://cop2p45f6pvjt" path="res://Scripts/gun.gd" id="4_4g5cr"]
 [ext_resource type="Texture2D" uid="uid://bbp27wyacj15g" path="res://Assets/Deagle.webp" id="4_c3mwy"]
+[ext_resource type="Script" uid="uid://bayjss82pbpyw" path="res://Scripts/Deagle.gd" id="4_r3lo5"]
 [ext_resource type="Texture2D" uid="uid://ynkcm2ppo741" path="res://Assets/basic_gun_flash.png" id="6_ckhy6"]
 [ext_resource type="Script" uid="uid://bvd8dcadqus1b" path="res://Scripts/Enemy.gd" id="7_dun2r"]
+[ext_resource type="Texture2D" uid="uid://dbc45gdleuai1" path="res://Assets/red.jpg" id="8_r3lo5"]
 
 [sub_resource type="GDScript" id="GDScript_dun2r"]
 script/source = "extends Node2D
@@ -30,7 +31,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GunSprite/Gun_Flash:frame")
+tracks/0/path = NodePath("Gun_Flash:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -42,7 +43,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GunSprite/Gun_Flash:visible")
+tracks/1/path = NodePath("Gun_Flash:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -51,13 +52,25 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_dun2r"]
 resource_name = "gun_flash"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GunSprite/Gun_Flash:frame")
+tracks/0/path = NodePath("Gun_Flash:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -69,7 +82,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GunSprite/Gun_Flash:visible")
+tracks/1/path = NodePath("Gun_Flash:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -79,10 +92,26 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_a6f85"]
+resource_name = "reload"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GunSprite:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.35, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qtxxq"]
 _data = {
 &"RESET": SubResource("Animation_r3lo5"),
-&"gun_flash": SubResource("Animation_dun2r")
+&"gun_flash": SubResource("Animation_dun2r"),
+&"reload": SubResource("Animation_a6f85")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8pvmw"]
@@ -98,6 +127,66 @@ gradient = SubResource("Gradient_8pvmw")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g5cr"]
 size = Vector2(52.7266, 52.1467)
 
+[sub_resource type="Animation" id="Animation_8fnbn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qtxxq"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333334, 0.1),
+"transitions": PackedFloat32Array(0.25881636, 0.25881636, 0.25881636),
+"update": 0,
+"values": [0.0, 0.6981317, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333334, 0.1),
+"transitions": PackedFloat32Array(0.25881636, 0.25881636, 0.25881636),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(16.2, 5.765), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a6f85"]
+_data = {
+&"RESET": SubResource("Animation_8fnbn"),
+&"hurt": SubResource("Animation_qtxxq")
+}
+
 [node name="root" type="Node2D"]
 script = SubResource("GDScript_dun2r")
 
@@ -109,8 +198,8 @@ script = ExtResource("1_8pvmw")
 shape = SubResource("RectangleShape2D_fpdt3")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-scale = Vector2(0.359375, 0.359375)
-texture = ExtResource("2_vnucn")
+scale = Vector2(0.102, 0.102)
+texture = ExtResource("2_r3lo5")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 ignore_rotation = false
@@ -118,31 +207,31 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("3_vnucn")
 
-[node name="Gun" type="Node2D" parent="Player"]
-script = ExtResource("4_4g5cr")
+[node name="Deagle" type="Node2D" parent="Player"]
+script = ExtResource("4_r3lo5")
 
-[node name="GunSprite" type="Sprite2D" parent="Player/Gun"]
-position = Vector2(44.2245, 0)
-scale = Vector2(0.03, 0.03)
-texture = ExtResource("4_c3mwy")
-
-[node name="Gun_Flash" type="Sprite2D" parent="Player/Gun/GunSprite"]
-position = Vector2(-385.81702, -1919.7333)
-scale = Vector2(11.5, 11.5)
+[node name="Gun_Flash" type="Sprite2D" parent="Player/Deagle"]
+position = Vector2(61.12395, -5.94524)
+scale = Vector2(0.34500003, 0.34500003)
 texture = ExtResource("6_ckhy6")
-offset = Vector2(134.34583, 147.83472)
+offset = Vector2(51.812622, -1.8660126)
 hframes = 4
 
-[node name="RayCast2D" type="RayCast2D" parent="Player/Gun/GunSprite"]
+[node name="RayCast2D" type="RayCast2D" parent="Player/Deagle"]
 unique_name_in_owner = true
-position = Vector2(600, -219.634)
+position = Vector2(62.224503, -6.5890217)
+scale = Vector2(0.03, 0.03)
 target_position = Vector2(20000, -17.183)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Gun/GunSprite"]
-root_node = NodePath("../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Deagle"]
 libraries = {
 &"": SubResource("AnimationLibrary_qtxxq")
 }
+
+[node name="GunSprite" type="Sprite2D" parent="Player/Deagle"]
+position = Vector2(44.649994, 0.40799904)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("4_c3mwy")
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -203,5 +292,10 @@ script = ExtResource("7_dun2r")
 shape = SubResource("RectangleShape2D_4g5cr")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemy"]
-scale = Vector2(0.400001, 0.400001)
-texture = ExtResource("2_vnucn")
+scale = Vector2(0.113, 0.113)
+texture = ExtResource("8_r3lo5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
+libraries = {
+&"": SubResource("AnimationLibrary_a6f85")
+}
