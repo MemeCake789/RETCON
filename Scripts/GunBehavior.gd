@@ -25,7 +25,7 @@ class_name GunBehavior
 
 # --- Ammunition ---
 @export_group("Ammunition")
-@export var mag_size		: int		= 7
+@export var mag_size: int		= 7
 var current_ammo	: int
 var total_ammo		: int		= 35
 
@@ -34,13 +34,14 @@ var total_ammo		: int		= 35
 var is_reloading	: bool		= false
 var can_shoot		: bool		= true
 
-
 func _ready() -> void:
 	current_ammo = mag_size
+	RELAY.update_ammo_ui.emit(current_ammo)
 
 func UpdateGunVisuals(mouse_position: Vector2) -> void:
 	_ApplyRotation(mouse_position)
 	_ApplyOffset(mouse_position)
+	RELAY.update_ammo_ui.emit(current_ammo)
 
 func PerformShoot() -> void:
 	if not can_shoot or is_reloading or current_ammo <= 0:
@@ -59,7 +60,7 @@ func PerformReload() -> void:
 
 	is_reloading = true
 	animation_player.play("reload")
-	await animation_player.animation_finished # This pauses execution until the animation is done.
+	await animation_player.animation_finished
 
 	var ammo_to_reload = mag_size - current_ammo
 	var ammo_available = min(ammo_to_reload, total_ammo)
@@ -85,6 +86,7 @@ func _ApplyOffset(mouse_position: Vector2) -> void:
 	var target_offset = max_offset * offset_ratio
 
 	gun_sprite.position = lerp(gun_sprite.position, target_offset, offset_speed)
+	gun_flash.position = lerp(gun_flash.position, target_offset, offset_speed)
 
 
 func _ApplyRecoil() -> void:

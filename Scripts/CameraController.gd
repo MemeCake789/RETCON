@@ -2,12 +2,12 @@ extends Camera2D
 const SMOOTHING : int = 5
 const STRENGTH : int = 4
 
-var previous_velocity : Vector2 = Vector2.ZERO # Velocity of last frame
+var previous_velocity : Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	pass # Replace with function body.
 
- 
+
 func _process(delta: float) -> void:
 	MouseCameraOffset(delta)
 	PlayerSpeedCameraTilt(delta)
@@ -16,14 +16,14 @@ func PlayerSpeedCameraTilt(delta: float):
 	var player = get_parent()
 	if player and player.has_method("get_velocity"):
 		var player_velocity = player.velocity
-		print(player_velocity)
-		
+		#print(player_velocity)
+
 		var velocity_change = player_velocity - previous_velocity
 
-		var rotation_strength = 0.01 
+		var rotation_strength = 0.01
 		var target_rotation = -velocity_change.x * rotation_strength
-		rotation = lerp_angle(rotation, target_rotation, delta * 0.5) 
-		
+		rotation = lerp_angle(rotation, target_rotation, delta * 0.5)
+
 		previous_velocity = player_velocity
 
 func MouseCameraOffset(delta: float):

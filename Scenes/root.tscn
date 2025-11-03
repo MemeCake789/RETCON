@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dt2ne53qelvns"]
+[gd_scene load_steps=23 format=3 uid="uid://dt2ne53qelvns"]
 
 [ext_resource type="Script" uid="uid://2u8jtq11umd0" path="res://Scripts/PlayerController.gd" id="1_8pvmw"]
 [ext_resource type="Texture2D" uid="uid://8kvudqemtd4e" path="res://Assets/cyan.jpg" id="2_r3lo5"]
@@ -187,6 +187,23 @@ _data = {
 &"hurt": SubResource("Animation_qtxxq")
 }
 
+[sub_resource type="GDScript" id="GDScript_r3lo5"]
+resource_name = "Ammo"
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	RELAY.update_ammo_ui.connect(on_ammo_update)
+
+func on_ammo_update(value : int):
+	text = \"AMMO : %s\" % [value]
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
 [node name="root" type="Node2D"]
 script = SubResource("GDScript_dun2r")
 
@@ -299,3 +316,24 @@ texture = ExtResource("8_r3lo5")
 libraries = {
 &"": SubResource("AnimationLibrary_a6f85")
 }
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AMMO" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 25.0
+offset_top = 21.0
+offset_right = 135.0
+offset_bottom = 44.0
+size_flags_horizontal = 4
+text = "AMMO : !NUM"
+script = SubResource("GDScript_r3lo5")
