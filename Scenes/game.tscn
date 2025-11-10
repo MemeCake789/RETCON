@@ -1,0 +1,301 @@
+[gd_scene load_steps=22 format=3 uid="uid://bp753pwdd5xvr"]
+
+[ext_resource type="Script" uid="uid://2u8jtq11umd0" path="res://Scripts/PlayerController.gd" id="1_v158k"]
+[ext_resource type="Texture2D" uid="uid://8kvudqemtd4e" path="res://Assets/cyan.jpg" id="2_h4fw4"]
+[ext_resource type="Script" uid="uid://c7it2dcggmk3i" path="res://Scripts/CameraController.gd" id="3_ldgsr"]
+[ext_resource type="Script" uid="uid://bayjss82pbpyw" path="res://Scripts/Deagle.gd" id="4_o5yvi"]
+[ext_resource type="Texture2D" uid="uid://ynkcm2ppo741" path="res://Assets/basic_gun_flash.png" id="5_rku1e"]
+[ext_resource type="Texture2D" uid="uid://bbp27wyacj15g" path="res://Assets/Deagle.webp" id="6_rfjv2"]
+[ext_resource type="Script" uid="uid://bvd8dcadqus1b" path="res://Scripts/Enemy.gd" id="7_1phco"]
+[ext_resource type="Texture2D" uid="uid://dbc45gdleuai1" path="res://Assets/red.jpg" id="8_nb51f"]
+
+[sub_resource type="GDScript" id="GDScript_nnt18"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ewbju"]
+size = Vector2(46, 46)
+
+[sub_resource type="Animation" id="Animation_r3lo5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gun_Flash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gun_Flash:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_dun2r"]
+resource_name = "gun_flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gun_Flash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04, 0.06),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gun_Flash:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_a6f85"]
+resource_name = "reload"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GunSprite:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.35, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qtxxq"]
+_data = {
+&"RESET": SubResource("Animation_r3lo5"),
+&"gun_flash": SubResource("Animation_dun2r"),
+&"reload": SubResource("Animation_a6f85")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85qyi"]
+size = Vector2(20.323, 11.6863)
+
+[sub_resource type="Gradient" id="Gradient_8pvmw"]
+offsets = PackedFloat32Array(0, 0.181818, 0.25974, 0.428571, 0.480519, 0.538961, 0.694805, 0.798701, 0.928571, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.741385, 0.741385, 0.741385, 1, 0.25974, 0.25974, 0.25974, 1, 0.691357, 0.691357, 0.691357, 1, 1, 1, 1, 1, 0.538961, 0.538961, 0.538961, 1, 0.925353, 0.925353, 0.925353, 1, 0.226708, 0.226707, 0.226707, 1, 0.928571, 0.928571, 0.928571, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_iivbl"]
+gradient = SubResource("Gradient_8pvmw")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nbq1"]
+size = Vector2(52.7266, 52.1467)
+
+[sub_resource type="Animation" id="Animation_8fnbn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qtxxq"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333334, 0.1),
+"transitions": PackedFloat32Array(0.25881636, 0.25881636, 0.25881636),
+"update": 0,
+"values": [0.0, 0.6981317, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333334, 0.1),
+"transitions": PackedFloat32Array(0.25881636, 0.25881636, 0.25881636),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(16.2, 5.765), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a6f85"]
+_data = {
+&"RESET": SubResource("Animation_8fnbn"),
+&"hurt": SubResource("Animation_qtxxq")
+}
+
+[node name="root" type="Node2D"]
+script = SubResource("GDScript_nnt18")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(-199.65, 42.592)
+script = ExtResource("1_v158k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_ewbju")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(0.102, 0.102)
+texture = ExtResource("2_h4fw4")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+ignore_rotation = false
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("3_ldgsr")
+
+[node name="Deagle" type="Node2D" parent="Player"]
+script = ExtResource("4_o5yvi")
+
+[node name="Gun_Flash" type="Sprite2D" parent="Player/Deagle"]
+position = Vector2(61.12395, -5.94524)
+scale = Vector2(0.34500003, 0.34500003)
+texture = ExtResource("5_rku1e")
+offset = Vector2(51.812622, -1.8660126)
+hframes = 4
+
+[node name="RayCast2D" type="RayCast2D" parent="Player/Deagle"]
+unique_name_in_owner = true
+position = Vector2(62.224503, -6.5890217)
+scale = Vector2(0.03, 0.03)
+target_position = Vector2(20000, -17.183)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Deagle"]
+libraries = {
+&"": SubResource("AnimationLibrary_qtxxq")
+}
+
+[node name="GunSprite" type="Sprite2D" parent="Player/Deagle"]
+position = Vector2(44.649994, 0.40799904)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("6_rfjv2")
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Map"]
+position = Vector2(566, 659)
+scale = Vector2(696.867, 1.16245)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor"]
+scale = Vector2(0.673895, 1.03057)
+shape = SubResource("RectangleShape2D_85qyi")
+
+[node name="Sprite2D" type="Sprite2D" parent="Map/Floor"]
+scale = Vector2(0.0534915, 10.707)
+texture = SubResource("GradientTexture1D_iivbl")
+
+[node name="Floor2" type="StaticBody2D" parent="Map"]
+position = Vector2(829, 651)
+scale = Vector2(15.4777, 0.987688)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor2"]
+scale = Vector2(0.673895, 1.03057)
+shape = SubResource("RectangleShape2D_85qyi")
+
+[node name="Sprite2D" type="Sprite2D" parent="Map/Floor2"]
+scale = Vector2(0.0534915, 10.707)
+texture = SubResource("GradientTexture1D_iivbl")
+
+[node name="Floor3" type="StaticBody2D" parent="Map"]
+position = Vector2(829, 551)
+scale = Vector2(15.4777, 0.987688)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor3"]
+scale = Vector2(0.673895, 1.03057)
+shape = SubResource("RectangleShape2D_85qyi")
+
+[node name="Sprite2D" type="Sprite2D" parent="Map/Floor3"]
+scale = Vector2(0.0534915, 10.707)
+texture = SubResource("GradientTexture1D_iivbl")
+
+[node name="Floor4" type="StaticBody2D" parent="Map"]
+position = Vector2(-23, 597.585)
+rotation = -1.57079
+scale = Vector2(15.4777, 0.987688)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor4"]
+scale = Vector2(0.673895, 1.03057)
+shape = SubResource("RectangleShape2D_85qyi")
+
+[node name="Sprite2D" type="Sprite2D" parent="Map/Floor4"]
+scale = Vector2(0.0534915, 10.707)
+texture = SubResource("GradientTexture1D_iivbl")
+
+[node name="Enemy" type="RigidBody2D" parent="." groups=["Enemy"]]
+position = Vector2(61.397, 91.1921)
+script = ExtResource("7_1phco")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("RectangleShape2D_7nbq1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+scale = Vector2(0.113, 0.113)
+texture = ExtResource("8_nb51f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
+libraries = {
+&"": SubResource("AnimationLibrary_a6f85")
+}

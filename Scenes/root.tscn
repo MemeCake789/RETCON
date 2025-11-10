@@ -1,191 +1,49 @@
-[gd_scene load_steps=23 format=3 uid="uid://dt2ne53qelvns"]
+[gd_scene load_steps=7 format=3 uid="uid://dt2ne53qelvns"]
 
-[ext_resource type="Script" uid="uid://2u8jtq11umd0" path="res://Scripts/PlayerController.gd" id="1_8pvmw"]
-[ext_resource type="Texture2D" uid="uid://8kvudqemtd4e" path="res://Assets/cyan.jpg" id="2_r3lo5"]
-[ext_resource type="Script" uid="uid://c7it2dcggmk3i" path="res://Scripts/CameraController.gd" id="3_vnucn"]
-[ext_resource type="Texture2D" uid="uid://bbp27wyacj15g" path="res://Assets/Deagle.webp" id="4_c3mwy"]
-[ext_resource type="Script" uid="uid://bayjss82pbpyw" path="res://Scripts/Deagle.gd" id="4_r3lo5"]
-[ext_resource type="Texture2D" uid="uid://ynkcm2ppo741" path="res://Assets/basic_gun_flash.png" id="6_ckhy6"]
-[ext_resource type="Script" uid="uid://bvd8dcadqus1b" path="res://Scripts/Enemy.gd" id="7_dun2r"]
-[ext_resource type="Texture2D" uid="uid://dbc45gdleuai1" path="res://Assets/red.jpg" id="8_r3lo5"]
+[ext_resource type="PackedScene" uid="uid://bp753pwdd5xvr" path="res://Scenes/game.tscn" id="2_8pvmw"]
+[ext_resource type="FontFile" uid="uid://bdo2nl6m6earq" path="res://Assets/DM_Mono/DMMono-Light.ttf" id="9_qtxxq"]
 
-[sub_resource type="GDScript" id="GDScript_dun2r"]
-script/source = "extends Node2D
+[sub_resource type="GDScript" id="GDScript_qtxxq"]
+script/source = "extends CanvasLayer
 
+const SMOOTHING : int = 1
+const STRENGTH : int = 70
 
-# Called when the node enters the scene tree for the first time.
+var previous_velocity : Vector2 = Vector2.ZERO
+
 func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	MouseCameraOffset(delta)
+	#PlayerSpeedCameraTilt(delta)
+#
+#func PlayerSpeedCameraTilt(delta: float):
+	#var player = get_parent()
+	#if player and player.has_method(\"get_velocity\"):
+		#var player_velocity = player.velocity
+		##print(player_velocity)
+#
+		#var velocity_change = player_velocity - previous_velocity
+#
+		#var rotation_strength = 0.01
+		#var target_rotation = -velocity_change.x * rotation_strength
+		#rotation = lerp_angle(rotation, target_rotation, delta * 0.5)
+#
+		#previous_velocity = player_velocity
+
+func MouseCameraOffset(delta: float):
+	var mouse_position = get_viewport().get_mouse_position()
+	var viewport_center = get_viewport().size / 2.0
+	var target_offset = (Vector2(mouse_position) -viewport_center) / STRENGTH
+	offset = offset.lerp(target_offset, SMOOTHING * delta)
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fpdt3"]
-size = Vector2(46, 46)
-
-[sub_resource type="Animation" id="Animation_r3lo5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Gun_Flash:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Gun_Flash:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GunSprite:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_dun2r"]
-resource_name = "gun_flash"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Gun_Flash:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.04, 0.06),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Gun_Flash:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_a6f85"]
-resource_name = "reload"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GunSprite:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.35, 1),
-"update": 0,
-"values": [0.0, 6.2831855]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qtxxq"]
-_data = {
-&"RESET": SubResource("Animation_r3lo5"),
-&"gun_flash": SubResource("Animation_dun2r"),
-&"reload": SubResource("Animation_a6f85")
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pvmw"]
-size = Vector2(20.323, 11.6863)
-
-[sub_resource type="Gradient" id="Gradient_8pvmw"]
-offsets = PackedFloat32Array(0, 0.181818, 0.25974, 0.428571, 0.480519, 0.538961, 0.694805, 0.798701, 0.928571, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.741385, 0.741385, 0.741385, 1, 0.25974, 0.25974, 0.25974, 1, 0.691357, 0.691357, 0.691357, 1, 1, 1, 1, 1, 0.538961, 0.538961, 0.538961, 1, 0.925353, 0.925353, 0.925353, 1, 0.226708, 0.226707, 0.226707, 1, 0.928571, 0.928571, 0.928571, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vnucn"]
-gradient = SubResource("Gradient_8pvmw")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4g5cr"]
-size = Vector2(52.7266, 52.1467)
-
-[sub_resource type="Animation" id="Animation_8fnbn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:skew")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_qtxxq"]
-resource_name = "hurt"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:skew")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.03333334, 0.1),
-"transitions": PackedFloat32Array(0.25881636, 0.25881636, 0.25881636),
-"update": 0,
-"values": [0.0, 0.6981317, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.03333334, 0.1),
-"transitions": PackedFloat32Array(0.25881636, 0.25881636, 0.25881636),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(16.2, 5.765), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a6f85"]
-_data = {
-&"RESET": SubResource("Animation_8fnbn"),
-&"hurt": SubResource("Animation_qtxxq")
-}
+[sub_resource type="LabelSettings" id="LabelSettings_8fnbn"]
+font = ExtResource("9_qtxxq")
+font_size = 20
+font_color = Color(0.35686275, 0.40392157, 0.4392157, 1)
 
 [sub_resource type="GDScript" id="GDScript_r3lo5"]
 resource_name = "Ammo"
@@ -197,129 +55,29 @@ func _ready() -> void:
 	RELAY.update_ammo_ui.connect(on_ammo_update)
 
 func on_ammo_update(value : int):
-	text = \"AMMO : %s\" % [value]
+	text = \"AMMO:%s\" % [value]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 "
 
-[node name="root" type="Node2D"]
-script = SubResource("GDScript_dun2r")
+[sub_resource type="LabelSettings" id="LabelSettings_qtxxq"]
+font = ExtResource("9_qtxxq")
+font_size = 20
+font_color = Color(0.38, 0.71066666, 1, 1)
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(-199.65, 42.592)
-script = ExtResource("1_8pvmw")
+[node name="CanvasLayer" type="CanvasLayer"]
+script = SubResource("GDScript_qtxxq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_fpdt3")
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -83.0
+offset_top = -62.0
+offset_right = 1221.0
+offset_bottom = 705.0
+color = Color(0, 0, 0, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-scale = Vector2(0.102, 0.102)
-texture = ExtResource("2_r3lo5")
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-ignore_rotation = false
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-script = ExtResource("3_vnucn")
-
-[node name="Deagle" type="Node2D" parent="Player"]
-script = ExtResource("4_r3lo5")
-
-[node name="Gun_Flash" type="Sprite2D" parent="Player/Deagle"]
-position = Vector2(61.12395, -5.94524)
-scale = Vector2(0.34500003, 0.34500003)
-texture = ExtResource("6_ckhy6")
-offset = Vector2(51.812622, -1.8660126)
-hframes = 4
-
-[node name="RayCast2D" type="RayCast2D" parent="Player/Deagle"]
-unique_name_in_owner = true
-position = Vector2(62.224503, -6.5890217)
-scale = Vector2(0.03, 0.03)
-target_position = Vector2(20000, -17.183)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Deagle"]
-libraries = {
-&"": SubResource("AnimationLibrary_qtxxq")
-}
-
-[node name="GunSprite" type="Sprite2D" parent="Player/Deagle"]
-position = Vector2(44.649994, 0.40799904)
-scale = Vector2(0.03, 0.03)
-texture = ExtResource("4_c3mwy")
-
-[node name="Map" type="Node2D" parent="."]
-
-[node name="Floor" type="StaticBody2D" parent="Map"]
-position = Vector2(566, 659)
-scale = Vector2(696.867, 1.16245)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor"]
-scale = Vector2(0.673895, 1.03057)
-shape = SubResource("RectangleShape2D_8pvmw")
-
-[node name="Sprite2D" type="Sprite2D" parent="Map/Floor"]
-scale = Vector2(0.0534915, 10.707)
-texture = SubResource("GradientTexture1D_vnucn")
-
-[node name="Floor2" type="StaticBody2D" parent="Map"]
-position = Vector2(829, 651)
-scale = Vector2(15.4777, 0.987688)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor2"]
-scale = Vector2(0.673895, 1.03057)
-shape = SubResource("RectangleShape2D_8pvmw")
-
-[node name="Sprite2D" type="Sprite2D" parent="Map/Floor2"]
-scale = Vector2(0.0534915, 10.707)
-texture = SubResource("GradientTexture1D_vnucn")
-
-[node name="Floor3" type="StaticBody2D" parent="Map"]
-position = Vector2(829, 551)
-scale = Vector2(15.4777, 0.987688)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor3"]
-scale = Vector2(0.673895, 1.03057)
-shape = SubResource("RectangleShape2D_8pvmw")
-
-[node name="Sprite2D" type="Sprite2D" parent="Map/Floor3"]
-scale = Vector2(0.0534915, 10.707)
-texture = SubResource("GradientTexture1D_vnucn")
-
-[node name="Floor4" type="StaticBody2D" parent="Map"]
-position = Vector2(-23, 597.585)
-rotation = -1.57079
-scale = Vector2(15.4777, 0.987688)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Floor4"]
-scale = Vector2(0.673895, 1.03057)
-shape = SubResource("RectangleShape2D_8pvmw")
-
-[node name="Sprite2D" type="Sprite2D" parent="Map/Floor4"]
-scale = Vector2(0.0534915, 10.707)
-texture = SubResource("GradientTexture1D_vnucn")
-
-[node name="Enemy" type="RigidBody2D" parent="." groups=["Enemy"]]
-position = Vector2(61.397, 91.1921)
-script = ExtResource("7_dun2r")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-shape = SubResource("RectangleShape2D_4g5cr")
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
-scale = Vector2(0.113, 0.113)
-texture = ExtResource("8_r3lo5")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
-libraries = {
-&"": SubResource("AnimationLibrary_a6f85")
-}
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -327,13 +85,49 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AMMO" type="Label" parent="CanvasLayer/Control"]
+[node name="AMMO" type="Label" parent="Control"]
+modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
 layout_mode = 1
 anchors_preset = -1
-offset_left = 25.0
-offset_top = 21.0
-offset_right = 135.0
-offset_bottom = 44.0
+offset_left = 40.0
+offset_top = 6.0
+offset_right = 150.0
+offset_bottom = 33.0
 size_flags_horizontal = 4
-text = "AMMO : !NUM"
+text = "AMMO:%s"
+label_settings = SubResource("LabelSettings_8fnbn")
 script = SubResource("GDScript_r3lo5")
+
+[node name="AMMO2" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 17.0
+offset_top = 6.0
+offset_right = 43.0
+offset_bottom = 33.0
+size_flags_horizontal = 4
+text = "//"
+label_settings = SubResource("LabelSettings_qtxxq")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -896.0
+offset_top = -295.0
+offset_right = -32.0
+offset_bottom = 295.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(864, 590)
+render_target_update_mode = 4
+
+[node name="root" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_8pvmw")]
