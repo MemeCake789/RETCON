@@ -14,11 +14,12 @@ func _ready():
 			var new_item = item_scene.instantiate()
 			items[i] = new_item
 			add_child(new_item)
-			if i != current_slot:
+			if i == current_slot:
+				new_item.show()
+				new_item.process_mode = Node.PROCESS_MODE_INHERIT
+			else:
 				new_item.hide()
-
-	if items[current_slot]:
-		items[current_slot].show()
+				new_item.process_mode = Node.PROCESS_MODE_DISABLED
 
 	RELAY.selected_slot_changed.emit.call_deferred(current_slot)
 
@@ -35,10 +36,12 @@ func _set_selected_slot(new_slot: int):
 	if new_slot >= 0 and new_slot < items.size() and new_slot != current_slot:
 		if items[current_slot] != null:
 			items[current_slot].hide()
+			items[current_slot].process_mode = Node.PROCESS_MODE_DISABLED
 
 		current_slot = new_slot
 
 		if items[current_slot] != null:
 			items[current_slot].show()
+			items[current_slot].process_mode = Node.PROCESS_MODE_INHERIT
 			
 		RELAY.selected_slot_changed.emit(current_slot)

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="GunData" load_steps=2 format=3 uid="uid://bsexbf8v03khp"]
 
-[ext_resource type="Script" uid="uid://cwxhmeu736oma" path="res://Scripts/GunData.gd" id="1_4xf34"]
+[ext_resource type="Script" uid="uid://biiivcfnt0s5c" path="res://Scripts/GunData.gd" id="1_4xf34"]
 
 [resource]
 script = ExtResource("1_4xf34")
-current_ammo = 8
-max_ammo = 8
-damage = 20.0
+ammo_max = 8
+ammo_current = 8
+metadata/_custom_type_script = "uid://biiivcfnt0s5c"

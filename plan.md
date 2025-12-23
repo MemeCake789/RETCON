@@ -23,19 +23,19 @@ This plan outlines the steps to create a 3-slot inventory system with hotkey acc
 	- [x] In the UI script, add logic to highlight the currently selected slot.
 
 - [ ] **4. Integration**
-	- [ ] Add the `Inventory.gd` script to the `Player` node (or a suitable parent node).
+	- [x] Add the `Inventory.gd` script to the `Player` node (or a suitable parent node).
 	- [ ] Instance the `InventoryUI.tscn` into the main game scene.
 	- [ ] Connect the `selected_slot_changed` signal from `Inventory.gd` to a function in `InventoryUI.gd` that updates the UI.
 
 - [ ] **5. Item Representation**
-	- [ ] Define a custom resource for items (e.g., `ItemResource.gd`) with properties like `name` and `texture`.
-	- [ ] Create three item resources with unique names and textures.
-	- [ ] Update the `Inventory.gd` script to use these item resources.
+	- [x] Define a custom resource for items (e.g., `ItemResource.gd`) with properties like `name` and `texture`. (Implemented using `GunData.gd` for gun-specific data).
+	- [x] Create three item resources with unique names and textures.
+	- [x] Update the `Inventory.gd` script to use these item resources. (Uses PackedScenes which contain the resources).
 	- [ ] Update the `InventoryUI.gd` script to display the item textures in the slots.
 
 - [ ] **6. Testing**
-	- [ ] Run the game and test the following:
-		- [ ] Does the inventory initialize with the three items?
-		- [ ] Can you select inventory slots with the '1', '2', and '3' keys?
+	- [x] Run the game and test the following:
+		- [x] Does the inventory initialize with the three items?
+		- [x] Can you select inventory slots with the '1', '2', and '3' keys?
 		- [ ] Does the UI correctly highlight the selected slot?
 		- [ ] Does the UI display the correct item textures?

@@ -25,9 +25,8 @@ class_name GunBehavior
 
 # --- Ammunition ---
 @export_group("Ammunition")
-@export var mag_size: int		= 7
-var current_ammo	: int
-var total_ammo		: int		= 35
+@export var gun_data: GunData
+@export var total_ammo: int = 35
 
 
 # --- State Variables ---
@@ -35,16 +34,18 @@ var is_reloading	: bool		= false
 var can_shoot		: bool		= true
 
 func _ready() -> void:
-	current_ammo = mag_size
-	RELAY.update_ammo_ui.emit(current_ammo)
+	assert(gun_data, "GunData resource must be assigned to the gun.")
+	gun_data = gun_data.duplicate()
+	gun_data.ammo_current = gun_data.ammo_max
+	RELAY.update_ammo_ui.emit(gun_data.ammo_current)
 
 func UpdateGunVisuals(mouse_position: Vector2) -> void:
 	_ApplyRotation(mouse_position)
 	_ApplyOffset(mouse_position)
-	RELAY.update_ammo_ui.emit(current_ammo)
+	RELAY.update_ammo_ui.emit(gun_data.ammo_current)
 
 func PerformShoot() -> void:
-	if not can_shoot or is_reloading or current_ammo <= 0:
+	if not can_shoot or is_reloading or gun_data.ammo_current <= 0:
 		return
 
 	var collider = gun_raycast.get_collider()
@@ -52,20 +53,20 @@ func PerformShoot() -> void:
 	_PlayShootEffects()
 	_ApplyRecoil()
 
-	current_ammo -= 1
+	gun_data.ammo_current -= 1
 
 func PerformReload() -> void:
-	if is_reloading or current_ammo == mag_size or total_ammo <= 0:
+	if is_reloading or gun_data.ammo_current == gun_data.ammo_max or total_ammo <= 0:
 		return
 
 	is_reloading = true
 	animation_player.play("reload")
 	await animation_player.animation_finished
 
-	var ammo_to_reload = mag_size - current_ammo
+	var ammo_to_reload = gun_data.ammo_max - gun_data.ammo_current
 	var ammo_available = min(ammo_to_reload, total_ammo)
 
-	current_ammo += ammo_available
+	gun_data.ammo_current += ammo_available
 	total_ammo -= ammo_available
 
 	is_reloading = false
