@@ -1,11 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://bp753pwdd5xvr"]
+[gd_scene load_steps=18 format=3 uid="uid://bp753pwdd5xvr"]
 
 [ext_resource type="Script" uid="uid://2u8jtq11umd0" path="res://Scripts/PlayerController.gd" id="1_v158k"]
 [ext_resource type="Texture2D" uid="uid://8kvudqemtd4e" path="res://Assets/cyan.jpg" id="2_h4fw4"]
 [ext_resource type="Script" uid="uid://c7it2dcggmk3i" path="res://Scripts/CameraController.gd" id="3_ldgsr"]
-[ext_resource type="Script" uid="uid://bayjss82pbpyw" path="res://Scripts/Deagle.gd" id="4_o5yvi"]
-[ext_resource type="Texture2D" uid="uid://ynkcm2ppo741" path="res://Assets/basic_gun_flash.png" id="5_rku1e"]
-[ext_resource type="Texture2D" uid="uid://bbp27wyacj15g" path="res://Assets/Deagle.webp" id="6_rfjv2"]
+[ext_resource type="PackedScene" uid="uid://b3w5vwrmx2cwi" path="res://Scenes/Weapon/AK-47/AK47.tscn" id="4_i6g32"]
+[ext_resource type="Script" uid="uid://c4b4nbdra4kar" path="res://Scripts/Inventory.gd" id="5_v158k"]
+[ext_resource type="PackedScene" uid="uid://b1vtax7v2vspk" path="res://Scenes/Weapon/Deagle/deagle.tscn" id="6_h4fw4"]
 [ext_resource type="Script" uid="uid://bvd8dcadqus1b" path="res://Scripts/Enemy.gd" id="7_1phco"]
 [ext_resource type="Texture2D" uid="uid://dbc45gdleuai1" path="res://Assets/red.jpg" id="8_nb51f"]
 
@@ -25,94 +25,6 @@ func _process(delta: float) -> void:
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ewbju"]
 size = Vector2(46, 46)
-
-[sub_resource type="Animation" id="Animation_r3lo5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Gun_Flash:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Gun_Flash:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GunSprite:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_dun2r"]
-resource_name = "gun_flash"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Gun_Flash:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.04, 0.06),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Gun_Flash:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_a6f85"]
-resource_name = "reload"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GunSprite:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.35, 1),
-"update": 0,
-"values": [0.0, 6.2831855]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qtxxq"]
-_data = {
-&"RESET": SubResource("Animation_r3lo5"),
-&"gun_flash": SubResource("Animation_dun2r"),
-&"reload": SubResource("Animation_a6f85")
-}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85qyi"]
 size = Vector2(20.323, 11.6863)
@@ -207,31 +119,9 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("3_ldgsr")
 
-[node name="Deagle" type="Node2D" parent="Player"]
-script = ExtResource("4_o5yvi")
-
-[node name="Gun_Flash" type="Sprite2D" parent="Player/Deagle"]
-position = Vector2(61.12395, -5.94524)
-scale = Vector2(0.34500003, 0.34500003)
-texture = ExtResource("5_rku1e")
-offset = Vector2(51.812622, -1.8660126)
-hframes = 4
-
-[node name="RayCast2D" type="RayCast2D" parent="Player/Deagle"]
-unique_name_in_owner = true
-position = Vector2(62.224503, -6.5890217)
-scale = Vector2(0.03, 0.03)
-target_position = Vector2(20000, -17.183)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Deagle"]
-libraries = {
-&"": SubResource("AnimationLibrary_qtxxq")
-}
-
-[node name="GunSprite" type="Sprite2D" parent="Player/Deagle"]
-position = Vector2(44.649994, 0.40799904)
-scale = Vector2(0.03, 0.03)
-texture = ExtResource("6_rfjv2")
+[node name="Inventory" type="Node2D" parent="Player"]
+script = ExtResource("5_v158k")
+starting_item_scenes = Array[PackedScene]([ExtResource("6_h4fw4"), ExtResource("4_i6g32"), ExtResource("6_h4fw4")])
 
 [node name="Map" type="Node2D" parent="."]
 

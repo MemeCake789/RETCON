@@ -1,16 +1,44 @@
 extends Node
 
-# inventory system
-# there are three different slots
-# the user can press 'q' and 'e' to cycle
-# the inventory sets held to the current item
-# update ui & weapon held
+@export var starting_item_scenes: Array[PackedScene]
+
+var items: Array = []             
+var current_slot: int = 0           
 
 func _ready():
-    pass
+	items.resize(3)
 
-func _process(delta):
-    pass
+	for i in range(min(starting_item_scenes.size(), 3)):
+		var item_scene = starting_item_scenes[i]
+		if item_scene is PackedScene:
+			var new_item = item_scene.instantiate()
+			items[i] = new_item
+			add_child(new_item)
+			if i != current_slot:
+				new_item.hide()
+
+	if items[current_slot]:
+		items[current_slot].show()
+
+	RELAY.selected_slot_changed.emit.call_deferred(current_slot)
+
 
 func _input(event):
-    pass
+	if event.is_action_pressed("Inventory_01"):
+		_set_selected_slot(0)
+	elif event.is_action_pressed("Inventory_02"):
+		_set_selected_slot(1)
+	elif event.is_action_pressed("Inventory_03"):
+		_set_selected_slot(2)
+
+func _set_selected_slot(new_slot: int):
+	if new_slot >= 0 and new_slot < items.size() and new_slot != current_slot:
+		if items[current_slot] != null:
+			items[current_slot].hide()
+
+		current_slot = new_slot
+
+		if items[current_slot] != null:
+			items[current_slot].show()
+			
+		RELAY.selected_slot_changed.emit(current_slot)

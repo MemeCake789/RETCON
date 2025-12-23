@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GunData" load_steps=2 format=3 uid="uid://djlt1k5sbgbja"]
+
+[ext_resource type="Script" uid="uid://cwxhmeu736oma" path="res://Scripts/GunData.gd" id="1_1iwqx"]
+
+[resource]
+script = ExtResource("1_1iwqx")
+current_ammo = 25
+max_ammo = 25
+damage = 50.0

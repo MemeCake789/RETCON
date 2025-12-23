@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbp27wyacj15g"
-path="res://.godot/imported/Deagle.webp-585d709c7b8afc7b3a1d20b62f543f97.ctex"
+uid="uid://cu06xdv8dpy8j"
+path="res://.godot/imported/Ak47.png-d9450c31b0f701594813f14ded1b0c3c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Deagle.webp"
-dest_files=["res://.godot/imported/Deagle.webp-585d709c7b8afc7b3a1d20b62f543f97.ctex"]
+source_file="res://Scenes/Weapon/AK-47/Ak47.png"
+dest_files=["res://.godot/imported/Ak47.png-d9450c31b0f701594813f14ded1b0c3c.ctex"]
 
 [params]
 

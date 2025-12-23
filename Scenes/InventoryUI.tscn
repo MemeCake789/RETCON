@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy1hqx8d3bd7x"]
+
+[ext_resource type="Script" path="res://Scripts/InventoryUI.gd" id="1_wly8d"]
+[ext_resource type="StyleBox" uid="uid://bpicell272e2y" path="res://Scenes/UI/slot_normal.tres" id="2_c4j8s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m8k1n"]
+
+[node name="InventoryUI" type="CanvasLayer"]
+script = ExtResource("1_wly8d")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -80.0
+offset_right = 100.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="Slot1" type="Panel" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_c4j8s")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Slot1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot2" type="Panel" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_c4j8s")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Slot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot3" type="Panel" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_c4j8s")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Slot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5

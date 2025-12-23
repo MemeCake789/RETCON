@@ -1,6 +1,6 @@
 # Project Overview
 
-This project is a 2D shooter game developed using the Godot Engine. The game features a player character with advanced movement mechanics, a mouse-controlled gun, and a simple enemy.
+This project is a 2D shooter game developed using the Godot Engine. The game features a player character with advanced movement mechanics, a mouse-controlled gun, and various enemies.
 
 ## Main Technologies
 
@@ -23,8 +23,21 @@ The project is structured as follows:
 ### Key Scripts
 
 *   **`PlayerController.gd`**: Manages player movement, including jumping, coyote time, and bunny hopping.
-*   **`gun.gd`**: Controls the gun's rotation, offset, and shooting mechanics.
+*   **`GunBehavior.gd`**: Controls the gun's rotation, offset, and shooting mechanics.
 *   **`CameraController.gd`**: Implements camera effects, such as tilt and mouse-based offset.
+*   **`Enemy.gd`**: Manages enemy health, damage, and animations.
+*   **`Inventory.gd`**: Handles player inventory management, including cycling through items and updating the UI.
+*   **`MessageBus.gd`**: Provides a centralized communication hub for game events, currently for UI updates like ammo.
+*   **`root.gd`**: The main script for the `root.tscn`, currently a placeholder for global game logic.
+
+# Current Task: Inventory System
+
+We are currently implementing a 3-slot inventory system with hotkey access and a UI. The plan for this is tracked in `plan.md`.
+
+The key features of the inventory system are:
+*   Three inventory slots.
+*   Hotkey access using '1', '2', and '3' keys.
+*   A user interface to display the inventory.
 
 # Building and Running
 

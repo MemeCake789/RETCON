@@ -77,6 +77,29 @@ offset_right = 1221.0
 offset_bottom = 705.0
 color = Color(0, 0, 0, 1)
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1119.0
+offset_top = -295.0
+offset_right = -32.0
+offset_bottom = 295.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1087, 590)
+render_target_update_mode = 4
+
+[node name="root" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_8pvmw")]
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -89,10 +112,10 @@ grow_vertical = 2
 modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
 layout_mode = 1
 anchors_preset = -1
-offset_left = 40.0
-offset_top = 6.0
-offset_right = 150.0
-offset_bottom = 33.0
+offset_left = 65.0
+offset_top = 37.0
+offset_right = 175.0
+offset_bottom = 64.0
 size_flags_horizontal = 4
 text = "AMMO:%s"
 label_settings = SubResource("LabelSettings_8fnbn")
@@ -101,33 +124,10 @@ script = SubResource("GDScript_r3lo5")
 [node name="AMMO2" type="Label" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 17.0
-offset_top = 6.0
-offset_right = 43.0
-offset_bottom = 33.0
+offset_left = 42.0
+offset_top = 37.0
+offset_right = 68.0
+offset_bottom = 64.0
 size_flags_horizontal = 4
 text = "//"
 label_settings = SubResource("LabelSettings_qtxxq")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -896.0
-offset_top = -295.0
-offset_right = -32.0
-offset_bottom = 295.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(864, 590)
-render_target_update_mode = 4
-
-[node name="root" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_8pvmw")]
