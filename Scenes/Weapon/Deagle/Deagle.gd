@@ -5,7 +5,7 @@ func _ready() -> void:
 	# damage = 50.0
 	# recoil_offset = Vector2(-35, 0)
 	# rotation_speed = 0.5
-	total_ammo = 40
+	#total_ammo = 40
 	super()
 
 

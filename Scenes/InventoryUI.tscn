@@ -1,25 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://cy1hqx8d3bd7x"]
+[gd_scene load_steps=3 format=3 uid="uid://cy1hqx8d3bd7x"]
 
-[ext_resource type="Script" path="res://Scripts/InventoryUI.gd" id="1_wly8d"]
+[ext_resource type="Script" uid="uid://cwcwki27jrnhu" path="res://Scripts/InventoryUI.gd" id="1_wly8d"]
 [ext_resource type="StyleBox" uid="uid://bpicell272e2y" path="res://Scenes/UI/slot_normal.tres" id="2_c4j8s"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m8k1n"]
 
 [node name="InventoryUI" type="CanvasLayer"]
 script = ExtResource("1_wly8d")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -80.0
-offset_right = 100.0
-offset_bottom = -20.0
-grow_horizontal = 2
+offset_left = -250.0
+offset_top = -110.0
+offset_right = -49.999756
+offset_bottom = -50.0
+grow_horizontal = 0
 grow_vertical = 0
+scale = Vector2(1.0055258, 1.0203408)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2

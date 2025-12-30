@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-var STYLE_NORMAL = preload("res://Scenes/UI/slot_normal.tres")
-var STYLE_SELECTED = preload("res://Scenes/UI/slot_selected.tres")
+var STYLE_NORMAL 	= preload("res://Scenes/UI/slot_normal.tres")
+var STYLE_SELECTED 	= preload("res://Scenes/UI/slot_selected.tres")
 
 @onready var slots = [
 	$MarginContainer/HBoxContainer/Slot1,

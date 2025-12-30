@@ -26,7 +26,7 @@ class_name GunBehavior
 # --- Ammunition ---
 @export_group("Ammunition")
 @export var gun_data: GunData
-@export var total_ammo: int = 35
+
 
 
 # --- State Variables ---
@@ -56,7 +56,7 @@ func PerformShoot() -> void:
 	gun_data.ammo_current -= 1
 
 func PerformReload() -> void:
-	if is_reloading or gun_data.ammo_current == gun_data.ammo_max or total_ammo <= 0:
+	if is_reloading or gun_data.ammo_current == gun_data.ammo_max:
 		return
 
 	is_reloading = true
@@ -64,10 +64,7 @@ func PerformReload() -> void:
 	await animation_player.animation_finished
 
 	var ammo_to_reload = gun_data.ammo_max - gun_data.ammo_current
-	var ammo_available = min(ammo_to_reload, total_ammo)
-
-	gun_data.ammo_current += ammo_available
-	total_ammo -= ammo_available
+	gun_data.ammo_current += ammo_to_reload
 
 	is_reloading = false
 
