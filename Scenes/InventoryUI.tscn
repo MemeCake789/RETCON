@@ -1,10 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://cy1hqx8d3bd7x"]
+[gd_scene load_steps=8 format=3 uid="uid://cy1hqx8d3bd7x"]
 
 [ext_resource type="Script" uid="uid://cwcwki27jrnhu" path="res://Scripts/InventoryUI.gd" id="1_wly8d"]
+[ext_resource type="Texture2D" uid="uid://cu06xdv8dpy8j" path="res://Scenes/Weapon/AK-47/Ak47.png" id="2_7qmbe"]
 [ext_resource type="StyleBox" uid="uid://bpicell272e2y" path="res://Scenes/UI/slot_normal.tres" id="2_c4j8s"]
+[ext_resource type="FontFile" uid="uid://bd0me8ciyb7k" path="res://Assets/Instrument_Serif/InstrumentSerif-Italic.ttf" id="2_ut0it"]
+[ext_resource type="FontFile" uid="uid://c6arhmnqvyeqq" path="res://Assets/Instrument_Serif/InstrumentSerif-Regular.ttf" id="3_3bnsd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3bnsd"]
+font = ExtResource("2_ut0it")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_ut0it"]
+line_spacing = -7.0
+font = ExtResource("3_3bnsd")
+font_size = 15
 
 [node name="InventoryUI" type="CanvasLayer"]
 script = ExtResource("1_wly8d")
+
+[node name="Ak47" type="Sprite2D" parent="."]
+position = Vector2(962, 537.7)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_7qmbe")
+
+[node name="ItemName" type="Label" parent="."]
+offset_left = 853.0
+offset_top = 544.7
+offset_right = 1053.0
+offset_bottom = 610.7
+text = "AK-47"
+label_settings = SubResource("LabelSettings_3bnsd")
+
+[node name="text_WEAPON" type="Label" parent="."]
+offset_left = 854.0
+offset_top = 533.7
+offset_right = 1054.0
+offset_bottom = 560.7
+text = "WEAPON:"
+label_settings = SubResource("LabelSettings_ut0it")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 3
@@ -12,13 +45,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -250.0
-offset_top = -110.0
-offset_right = -49.999756
-offset_bottom = -50.0
+offset_left = -332.00012
+offset_top = -170.00006
+offset_right = -131.99994
+offset_bottom = -110.00006
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(1.0055258, 1.0203408)
+rotation = -0.012217305
+scale = Vector2(0.4040468, 0.40999985)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2

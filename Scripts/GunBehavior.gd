@@ -5,6 +5,7 @@ class_name GunBehavior
 # --- Node References ---
 @onready var gun_sprite:       Sprite2D        = $GunSprite
 @onready var gun_flash:        Sprite2D        = $Gun_Flash
+@onready var gun_flash_offset: Vector2		   = Vector2(gun_flash.offset.x,gun_flash.offset.y)
 @onready var gun_raycast:      RayCast2D       = $RayCast2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -84,7 +85,7 @@ func _ApplyOffset(mouse_position: Vector2) -> void:
 	var target_offset = max_offset * offset_ratio
 
 	gun_sprite.position = lerp(gun_sprite.position, target_offset, offset_speed)
-	gun_flash.position = lerp(gun_flash.position, target_offset, offset_speed)
+	gun_flash.position = lerp(gun_flash.position, (gun_flash_offset+target_offset), offset_speed)
 
 
 func _ApplyRecoil() -> void:

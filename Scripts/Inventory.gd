@@ -21,7 +21,7 @@ func _ready():
 				new_item.hide()
 				new_item.process_mode = Node.PROCESS_MODE_DISABLED
 
-	RELAY.selected_slot_changed.emit.call_deferred(current_slot)
+	RELAY.selected_slot_changed.emit.call_deferred(current_slot, items[current_slot])
 
 
 func _input(event):
@@ -44,4 +44,4 @@ func _set_selected_slot(new_slot: int):
 			items[current_slot].show()
 			items[current_slot].process_mode = Node.PROCESS_MODE_INHERIT
 			
-		RELAY.selected_slot_changed.emit(current_slot)
+		RELAY.selected_slot_changed.emit(current_slot, items[current_slot])
