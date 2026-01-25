@@ -9,26 +9,21 @@ class_name GunBehavior
 @onready var gun_raycast:      RayCast2D       = $RayCast2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-
 # --- Gun Stats ---
 @export_group("Stats")
 @export var damage			: float		= 20.0
 @export var recoil_offset	: Vector2	= Vector2(-15,0)
 
-
 # --- Mouse Behavior ---
 @export_group("Mouse Behavior")
 @export var max_offset		: Vector2 	= Vector2(70, 0)  # How far the gun moves towards the mouse.
-@export var max_distance	: float 	= 400.0 # How far the mouse needs to be to reach max_offset.
-@export var rotation_speed	: float 	= 0.6   # How quickly the gun rotates towards the mouse.
-@export var offset_speed	: float 	= 0.3   # How quickly the gun moves into position.
-
+@export var max_distance	: float 	= 400.0 		  # How far the mouse needs to be to reach max_offset.
+@export var rotation_speed	: float 	= 0.6   		  # How quickly the gun rotates towards the mouse.
+@export var offset_speed	: float 	= 0.3   		  # How quickly the gun moves into position.
 
 # --- Ammunition ---
 @export_group("Ammunition")
 @export var gun_data: GunData
-
-
 
 # --- State Variables ---
 var is_reloading	: bool		= false
@@ -39,6 +34,9 @@ func _ready() -> void:
 	gun_data = gun_data.duplicate()
 	gun_data.ammo_current = gun_data.ammo_max
 	RELAY.update_ammo_ui.emit(gun_data.ammo_current)
+
+func GetGunData() -> Resource:
+	return gun_data
 
 func UpdateGunVisuals(mouse_position: Vector2) -> void:
 	_ApplyRotation(mouse_position)
@@ -95,7 +93,6 @@ func _ApplyRecoil() -> void:
 func _ApplyDamage(body) -> void:
 	if body and body.is_in_group("Enemy") and body.has_method("Damage"):
 		body.Damage(damage)
-
 
 func _PlayShootEffects() -> void:
 	animation_player.seek(0.0, true)

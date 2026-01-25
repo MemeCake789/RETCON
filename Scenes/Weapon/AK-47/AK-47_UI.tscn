@@ -22,24 +22,24 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ItemImage" type="Sprite2D" parent="."]
-position = Vector2(72, -1.3)
+position = Vector2(986, 559.7)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_lra7l")
 
 [node name="ItemName" type="Label" parent="."]
 layout_mode = 0
-offset_left = -37.0
-offset_top = 5.7
-offset_right = 163.0
-offset_bottom = 71.7
+offset_left = 882.0
+offset_top = 560.0
+offset_right = 1082.0
+offset_bottom = 626.0
 text = "AK-47"
 label_settings = SubResource("LabelSettings_3m5nb")
 
 [node name="ItemType" type="Label" parent="."]
 layout_mode = 0
-offset_left = -36.0
-offset_top = -5.3
-offset_right = 164.0
-offset_bottom = 21.7
+offset_left = 883.0
+offset_top = 549.0
+offset_right = 1083.0
+offset_bottom = 576.0
 text = "WEAPON:"
 label_settings = SubResource("LabelSettings_esd7j")

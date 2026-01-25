@@ -121,7 +121,7 @@ script = ExtResource("3_ldgsr")
 
 [node name="Inventory" type="Node2D" parent="Player"]
 script = ExtResource("5_v158k")
-starting_item_scenes = Array[PackedScene]([ExtResource("6_h4fw4"), ExtResource("4_i6g32"), ExtResource("6_h4fw4")])
+starting_item_scenes = Array[PackedScene]([ExtResource("6_h4fw4"), ExtResource("4_i6g32"), null])
 
 [node name="Map" type="Node2D" parent="."]
 
