@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="GunData" load_steps=2 format=3 uid="uid://djlt1k5sbgbja"]
+[gd_resource type="Resource" script_class="GunData" load_steps=3 format=3 uid="uid://djlt1k5sbgbja"]
 
 [ext_resource type="Script" uid="uid://biiivcfnt0s5c" path="res://Scripts/GunData.gd" id="1_1iwqx"]
+[ext_resource type="PackedScene" uid="uid://qh2f1tpjpkav" path="res://Scenes/Weapon/AK-47/AK-47_UI.tscn" id="2_gtp2d"]
 
 [resource]
 script = ExtResource("1_1iwqx")
 ammo_max = 35
 ammo_current = 35
+ui_position = ExtResource("2_gtp2d")
 metadata/_custom_type_script = "uid://biiivcfnt0s5c"

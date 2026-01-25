@@ -18,8 +18,8 @@ font_size = 15
 [node name="InventoryUI" type="CanvasLayer"]
 script = ExtResource("1_wly8d")
 
-[node name="Ak47" type="Sprite2D" parent="."]
-position = Vector2(962, 537.7)
+[node name="ItemImage" type="Sprite2D" parent="."]
+position = Vector2(988.00006, 554)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_7qmbe")
 
@@ -31,7 +31,7 @@ offset_bottom = 610.7
 text = "AK-47"
 label_settings = SubResource("LabelSettings_3bnsd")
 
-[node name="text_WEAPON" type="Label" parent="."]
+[node name="ItemType" type="Label" parent="."]
 offset_left = 854.0
 offset_top = 533.7
 offset_right = 1054.0

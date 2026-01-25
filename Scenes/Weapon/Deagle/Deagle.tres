@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="GunData" load_steps=2 format=3 uid="uid://bsexbf8v03khp"]
+[gd_resource type="Resource" script_class="GunData" load_steps=3 format=3 uid="uid://bsexbf8v03khp"]
 
 [ext_resource type="Script" uid="uid://biiivcfnt0s5c" path="res://Scripts/GunData.gd" id="1_4xf34"]
+[ext_resource type="PackedScene" uid="uid://cvw6boqwlg5rj" path="res://Scenes/Weapon/Deagle/Deagle_UI.tscn" id="2_5vlcd"]
 
 [resource]
 script = ExtResource("1_4xf34")
 ammo_max = 8
 ammo_current = 8
+ui_position = ExtResource("2_5vlcd")
 metadata/_custom_type_script = "uid://biiivcfnt0s5c"

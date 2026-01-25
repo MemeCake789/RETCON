@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://qh2f1tpjpkav"]
+
+[ext_resource type="Texture2D" uid="uid://cu06xdv8dpy8j" path="res://Scenes/Weapon/AK-47/Ak47.png" id="1_lra7l"]
+[ext_resource type="FontFile" uid="uid://bd0me8ciyb7k" path="res://Assets/Instrument_Serif/InstrumentSerif-Italic.ttf" id="2_nhbgx"]
+[ext_resource type="FontFile" uid="uid://c6arhmnqvyeqq" path="res://Assets/Instrument_Serif/InstrumentSerif-Regular.ttf" id="3_5xy3q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3m5nb"]
+font = ExtResource("2_nhbgx")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_esd7j"]
+line_spacing = -7.0
+font = ExtResource("3_5xy3q")
+font_size = 15
+
+[node name="Ak47Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemImage" type="Sprite2D" parent="."]
+position = Vector2(72, -1.3)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_lra7l")
+
+[node name="ItemName" type="Label" parent="."]
+layout_mode = 0
+offset_left = -37.0
+offset_top = 5.7
+offset_right = 163.0
+offset_bottom = 71.7
+text = "AK-47"
+label_settings = SubResource("LabelSettings_3m5nb")
+
+[node name="ItemType" type="Label" parent="."]
+layout_mode = 0
+offset_left = -36.0
+offset_top = -5.3
+offset_right = 164.0
+offset_bottom = 21.7
+text = "WEAPON:"
+label_settings = SubResource("LabelSettings_esd7j")
